@@ -1,17 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import moment from 'moment';
-import parse from "html-react-parser";
+import moment from 'moment'
+import parse from 'html-react-parser'
 import { getComments } from '../services';
 
 const Comments = ({slug}) => {
   const [comments, setComments] = useState([])
-  console.log(comments)
-  
+
   useEffect(() => {
     getComments(slug)
-    .then(res => setComments(res))
+      .then(res => setComments(res))
   }, [])
-
 
   return (
     <>
@@ -31,7 +29,7 @@ const Comments = ({slug}) => {
                 {" "}
                 {moment(comment.createdAt).format("MMM DD, YYYY")}
               </p>
-              <p className='Whitespace-pre-line text-gray-600 w-full'>{parse(comment.comment)}</p>
+              <p className='whitespace-pre-line text-gray-600 w-full'>{parse(comment.comment)}</p>
             </div>
           ))}
         </div>

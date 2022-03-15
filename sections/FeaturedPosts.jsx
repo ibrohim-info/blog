@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import FeaturedPostCard from '../components/FeaturedPostCard';
+import "react-multi-carousel/lib/styles.css"
+import FeaturedPostCard from "../components/FeaturedPostCard";
 import { getFeaturedPosts } from "../services";
- 
 
 const responsive = {
   superLargeDesktop: {
@@ -18,7 +17,7 @@ const responsive = {
     breakpoint: {max: 768, min: 640},
     items: 2
   },
-  mobile: {
+  mobile:{
     breakpoint: {max: 640, min: 0},
     items: 1
   }
@@ -27,12 +26,13 @@ const responsive = {
 const FeaturedPosts = () => {
   const [featuredPosts, setFeaturedPosts] = useState([])
   const [dataLoaded, setDataLoaded] = useState(false)
+
   useEffect(() => {
-  getFeaturedPosts()
-  .then(res => {
-    setFeaturedPosts(res)
-    setDataLoaded(true)
-  })
+    getFeaturedPosts()
+      .then(res => {
+        setFeaturedPosts(res)
+        setDataLoaded(true)
+      })
   }, [])
 
   const customLeftArrow = (
@@ -50,22 +50,25 @@ const FeaturedPosts = () => {
       </svg>
     </div>
   );
-  return(
+
+  return (
     <div className="mb-8 container mx-auto">
       <Carousel 
-      showDots={true} 
-      autoPlay={true} 
-      autoPlaySpeed={3000} 
-      infinite customRightArrow={customRightArrow } 
-      customLeftArrow={customLeftArrow} 
-      responsive={responsive}
-      itemClass="px-4"
+        showDots={true} 
+        autoPlay={true} 
+        autoPlaySpeed={3000} 
+        infinite 
+        customRightArrow={customRightArrow} 
+        customLeftArrow={customLeftArrow} 
+        responsive={responsive}
+        itemClass="px-4"
       >
-      {dataLoaded && featuredPosts.map((post, index) => (
-        <FeaturedPostCard key={index} post={post}/>
-      ))}
+        {dataLoaded && featuredPosts.map((post, index) => (
+          <FeaturedPostCard key={index} post={post} />
+        ))}  
       </Carousel>
     </div>
   )
 }
-export default FeaturedPosts;
+
+export default FeaturedPosts
